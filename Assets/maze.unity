@@ -3728,6 +3728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 12
   health: 5
+  scoreText: {fileID: 251070116}
 --- !u!1 &870818734
 GameObject:
   m_ObjectHideFlags: 0

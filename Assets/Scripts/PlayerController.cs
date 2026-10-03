@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed = 12f;
     public int health = 5;
+    public Text scoreText;
     private int score = 0;
 
     private Rigidbody rb;
@@ -12,6 +14,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        SetScoreText();
     }
 
     void Update()
@@ -39,7 +42,8 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Pickup"))
         {
             score++;
-            Debug.Log("Score: " + score);
+            // Debug.Log("Score: " + score);
+            SetScoreText();
             other.gameObject.SetActive(false);
         }
 
@@ -53,5 +57,10 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("You win!");
         }
+    }
+
+    void SetScoreText()
+    {
+        scoreText.text = "Score: " + score;
     }
 }
