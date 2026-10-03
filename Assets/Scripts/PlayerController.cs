@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private int score = 0;
 
     private Rigidbody rb;
+    // Stops the reload coroutine from starting again every frame.
+    private bool reloading = false;
 
     void Start()
     {
@@ -23,16 +26,23 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (health == 0)
+        if (health == 0 && !reloading)
         {
             // Debug.Log("Game Over!");
             winLoseText.text = "Game Over!";
             winLoseText.color = Color.white;
             winLoseBG.color = Color.red;
             winLoseBG.gameObject.SetActive(true);
-            // Reloading the scene also resets health and score.
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            reloading = true;
+            StartCoroutine(LoadScene(3));
         }
+    }
+
+    IEnumerator LoadScene(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        // Reloading the scene also resets health and score.
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void FixedUpdate()
@@ -69,6 +79,11 @@ public class PlayerController : MonoBehaviour
             winLoseText.color = Color.black;
             winLoseBG.color = Color.green;
             winLoseBG.gameObject.SetActive(true);
+            if (!reloading)
+            {
+                reloading = true;
+                StartCoroutine(LoadScene(3));
+            }
         }
     }
 
