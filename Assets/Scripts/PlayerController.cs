@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour
             reloading = true;
             StartCoroutine(LoadScene(3));
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("menu");
+        }
     }
 
     IEnumerator LoadScene(float seconds)
