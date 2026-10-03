@@ -25,7 +25,11 @@ public class PlayerController : MonoBehaviour
     {
         if (health == 0)
         {
-            Debug.Log("Game Over!");
+            // Debug.Log("Game Over!");
+            winLoseText.text = "Game Over!";
+            winLoseText.color = Color.white;
+            winLoseBG.color = Color.red;
+            winLoseBG.gameObject.SetActive(true);
             // Reloading the scene also resets health and score.
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
